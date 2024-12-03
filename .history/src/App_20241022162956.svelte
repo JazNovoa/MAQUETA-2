@@ -1,0 +1,140 @@
+<!-- Script JS -->
+<script>
+  import * as d3 from "d3";
+  import juegos from "/src/data/juegos.json";
+
+  // Escala para la adictividad (color del relleno de los rectángulos st1)
+  const adictividad = d3
+    .scaleLinear()
+    .domain([1, 2, 3, 4, 5])
+    .range(["#000aff", "#9200b8", "#e92fed", "#ff9a51", "#ffe86f"]);
+
+  // Escala para el continente (color del borde del path st0)
+  const continente = d3
+    .scaleOrdinal()
+    .domain(["África", "Asia", "Europa", "America", "Oceania"])
+    .range(["#000aff", "#9200b8", "#e92fed", "#ff9a51", "#ffe86f"]);
+
+  // Función para cargar y modificar SVGs
+  async function loadAndModifySVG(url, juego) {
+    const response = await fetch(url);
+    const svgText = await response.text();
+    const parser = new DOMParser();
+    const svgDoc = parser.parseFromString(svgText, "image/svg+xml");
+    const svgElement = svgDoc.querySelector("svg");
+
+    // Cambiar el color de los rectángulos con clase 'st1' según la adictividad
+    svgElement.querySelectorAll(".st1").forEach((rect) => {
+      rect.setAttribute("fill", adictividad(juego.Adictividad));
+    });
+
+    // Cambiar el color del path con clase 'st0' según el continente
+    svgElement.querySelectorAll(".st0").forEach((path) => {
+      path.setAttribute("stroke", continente(juego.Continente));
+    });
+
+    return svgElement.outerHTML;
+  }
+
+  // Cargar los SVGs con las modificaciones adecuadas
+  let juegosSVG = [];
+
+  $: (async () => {
+    try {
+      juegosSVG = await Promise.all(
+        juegos.map(async (juego) => {
+          const svgContent = await loadAndModifySVG(juego.Imagen, juego);
+          return { ...juego, svgContent };
+        }),
+      );
+    } catch (error) {
+      console.error(error);
+    }
+  })();
+</script>
+
+<!-- Estructura contenido HTML -->
+<main>
+  <div class="header">
+    <img class="titulo" src="./public/images/TITULO.svg" width="50%" />
+  </div>
+
+  <div class="contenedor">
+    {#each juegosSVG as juego}
+      <div class="juego-item">
+        <p class="nombre-juego">{juego.Juego}</p>
+        <div class="modulos">
+          {#each Array(10) as _}
+            <div class="svg-wrapper">
+              {@html juego.svgContent}
+            </div>
+          {/each}
+        </div>
+      </div>
+    {/each}
+  </div>
+
+  <div>
+    <h1 class="titulo">Elaborado por Jazmin Novoa y Julieta Regueira</h1>
+  </div>
+</main>
+
+<style>
+  /* Estilos generales */
+  main {
+    height: 100vh;
+    margin: 0;
+    background-color: black;
+    color: white;
+    display: flex;
+    justify-content: center; /* Centrar contenido horizontalmente */
+    align-items: center; /* Centrar contenido verticalmente */
+    flex-direction: column;
+  }
+
+  .contenedor {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centra todas las filas horizontalmente */
+    gap: 5px; /* Espacio mínimo entre las filas */
+    width: 100%; /* Ocupa todo el ancho disponible */
+    max-width: 1020px; /* Máximo ancho del contenedor */
+  }
+
+  .juego-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%; /* Asegura que cada fila ocupe todo el ancho */
+  }
+
+  .nombre-juego {
+    font-size: 16px;
+    color: white;
+    margin-right: 5px; /* Espacio de 5px entre nombre y SVGs */
+    white-space: nowrap; /* Evita que los títulos se dividan en varias líneas */
+  }
+
+  .modulos {
+    display: flex;
+    gap: 2px; /* Espacio entre los SVGs */
+    justify-content: flex-end; /* Alinea los SVGs a la derecha */
+    flex-grow: 1; /* Permite que esta sección ocupe el espacio restante */
+  }
+
+  .svg-wrapper {
+    width: 40px;
+    height: 40px;
+  }
+
+  .svg-wrapper svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  .header {
+    margin-bottom: 30px;
+    text-align: center;
+  }
+</style>

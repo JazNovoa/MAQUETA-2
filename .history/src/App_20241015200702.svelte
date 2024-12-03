@@ -1,0 +1,118 @@
+<!-- Script JS -->
+<script>
+  import * as d3 from "d3";
+  import juegos from "/src/data/juegos.json"; //importamos juegos
+  
+  // Escala para adictividad
+  const adictividad = d3
+    .scaleLinear()
+    .domain([1, 2, 3, 4, 5])
+    .range(["#000aff", "#9200b8", "#e92fed", "#ff9a51", "#ffe86f"]);
+
+  // Función para cargar SVG desde la carpeta "public/images"
+  async function loadSVG(url) {
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error(`Error al cargar SVG: ${response.statusText}`);
+    }
+    return await response.text();
+  }
+//escala para almacenamiento
+const almacenamiento = d3
+      .scaleLinear()
+      .domain(["0-0.3", "0.3-0.6", "0.6-0.9", "0.9-1.2", "1.2-3.0"])
+      .range([3, 4, 6, 8, 15]);
+
+ //escala para años
+  const años = d3
+      .scaleLinear()
+      .domain(["0-4", "5-8", "9-12", "13-16", "17-20"])
+      .range([3, 6, 9, 12, 15]);
+
+ //escala continente
+  const continente = d3
+      .scaleOrdinal()
+      .domain(["África", "Asia", "Europa", "Norteamérica", "Sudamérica"])
+      .range(["#000aff", "#9200b8", "#e92fed", "ff9a51", "ffe86f"]);
+  // Cargar dinámicamente los SVGs
+  let juegosSVG = [];
+
+  // Al cargar el componente, cargamos todos los SVG necesarios
+  $: (async () => {
+    try {
+      juegosSVG = await Promise.all(
+        juegos.map(async (juego) => {
+          const svgContent = await loadSVG(juego.Imagen);
+          
+          // Cambia el color de los rectángulos en el SVG según la adictividad
+          const updatedSVGContent = svgContent.replace(/<rect/g, `<rect fill="${adictividad(juego.Adictividad)}"`);
+
+          return { ...juego, svgContent: updatedSVGContent };
+        })
+      );
+    } catch (error) {
+      console.error(error);
+    }
+  })();
+</script>
+
+<!-- Estructura contenido HTML -->
+<main>
+  <div class="header">
+    <h1 class="titulo">Gamer de bolsillo</h1>
+    <h2 class="subtitulo">Relevamiento de datos sobre jueguitos de celu</h2>
+  </div>
+
+  <div class="contenedor">
+    {#each juegosSVG as juego}
+    <div class="juego-item">
+      <p>{juego.Juego}</p>
+      <div 
+        class="continentes"
+        style="border-color: {adictividad(juego.Adictividad)}; width: {juego.Años * 5}%;"></div>
+      <div class="modulos">
+        {@html juego.svgContent} <!-- Asegúrate de que svgContent sea válido -->
+      </div>
+    </div>
+    {/each}
+  </div>
+</main>
+
+<!-- Estilos CSS -->
+<style>
+  main {
+    height: 100%;
+    margin: 0;
+    background-color: black;
+    color: white;
+  }
+
+  .contenedor {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Alinea los elementos en el centro */
+    gap: 20px; /* Espacio entre los elementos */
+    max-width: 1020px;
+    margin: auto; /* Centra el contenedor */
+  }
+
+  .continentes {
+    display: flex;
+    flex-direction: row-reverse;
+    height: 40px;
+    position: relative; /* Cambia a 'relative' si es necesario */
+    border-width: 5px;
+  }
+
+  .modulos {
+    display: flex; /* Asegúrate de que sea 'flex' para mostrar correctamente */
+    justify-content: center; /* Centra el contenido del módulo */
+    align-items: center; /* Centra verticalmente */
+  }
+
+  /* Estilo para el color de los SVGs */
+  .modulos svg {
+    width: 50px; /* Establece un ancho fijo para todos los SVGs */
+    height: 50px; /* Establece una altura fija para todos los SVGs */
+  }
+</style>

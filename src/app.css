@@ -1,0 +1,9 @@
+/* Estilos globales */
+.flourish-embed-iframe {
+    height: 1000px !important;
+  }
+
+  body{
+    background-color: black;
+    cursor: none;
+  }

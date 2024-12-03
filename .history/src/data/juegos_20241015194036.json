@@ -1,0 +1,227 @@
+[
+  {
+    "Juego": "Criminal Case",
+    "Género": "Aventura",
+    "Almacenamiento": 0.07,
+    "Años": 12,
+    "Adictividad": 1,
+    "Continente": "Europa",
+    "Imagen": "/images/AVENTURA.svg"
+  },
+  {
+    "Juego": "Angry Birds",
+    "Género": "Estrategia",
+    "Almacenamiento": 0.2,
+    "Años": 15,
+    "Adictividad": 1,
+    "Continente": "Europa",
+    "Imagen": "/images/ESTRATEGIA.svg"
+  },
+  {
+    "Juego": "Gatos y sopa",
+    "Género": "Idle",
+    "Almacenamiento": 1.5,
+    "Años": 3,
+    "Adictividad": 1,
+    "Continente": "Asia",
+    "Imagen": "/images/IDLE.svg"
+  },
+  {
+    "Juego": "Pou",
+    "Género": "Tycoon",
+    "Almacenamiento": 0.3,
+    "Años": 13,
+    "Adictividad": 1,
+    "Continente": "Asia",
+    "Imagen": "/images/TYCOON.svg"
+  },
+  {
+    "Juego": "Subway Surfers",
+    "Género": "Casual",
+    "Almacenamiento": 0.3,
+    "Años": 12,
+    "Adictividad": 2,
+    "Continente": "Europa",
+    "Imagen": "/images/CASUAL.svg"
+  },
+  {
+    "Juego": "Preguntados",
+    "Género": "Casual",
+    "Almacenamiento": 0.2,
+    "Años": 12,
+    "Adictividad": 2,
+    "Continente": "Sudamérica",
+    "Imagen": "/images/CASUAL.svg"
+  },
+  {
+    "Juego": "Crossy Road",
+    "Género": "Casual",
+    "Almacenamiento": 0.1,
+    "Años": 11,
+    "Adictividad": 2,
+    "Continente": "Oceania",
+    "Imagen": "/images/CASUAL.svg"
+  },
+  {
+    "Juego": "Fruit Ninja",
+    "Género": "Casual",
+    "Almacenamiento": 0.1,
+    "Años": 14,
+    "Adictividad": 2,
+    "Continente": "Oceania",
+    "Imagen": "/images/CASUAL.svg"
+  },
+  {
+    "Juego": "Golden Georges",
+    "Género": "Idle",
+    "Almacenamiento": 0.2,
+    "Años": 7,
+    "Adictividad": 2,
+    "Continente": "África",
+    "Imagen": "/images/IDLE.svg"
+  },
+  {
+    "Juego": "Kitty Collector",
+    "Género": "Idle",
+    "Almacenamiento": 0.2,
+    "Años": 10,
+    "Adictividad": 2,
+    "Continente": "Asia",
+    "Imagen": "/images/IDLE.svg"
+  },
+  {
+    "Juego": "Pocket Love",
+    "Género": "Tycoon",
+    "Almacenamiento": 0.6,
+    "Años": 3,
+    "Adictividad": 2,
+    "Continente": "Norteamérica",
+    "Imagen": "/images/TYCOON.svg"
+  },
+  {
+    "Juego": "Tsuki Odyssey",
+    "Género": "Aventura",
+    "Almacenamiento": 0.8,
+    "Años": 3,
+    "Adictividad": 3,
+    "Continente": "Norteamérica",
+    "Imagen": "/images/AVENTURA.svg"
+  },
+  {
+    "Juego": "GTA San Andreas",
+    "Género": "Aventura",
+    "Almacenamiento": 2.6,
+    "Años": 20,
+    "Adictividad": 3,
+    "Continente": "Europa",
+    "Imagen": "/images/TYCOON.svg"
+  },
+  {
+    "Juego": "Tiny Room Stories",
+    "Género": "Aventura",
+    "Almacenamiento": 0.2,
+    "Años": 6,
+    "Adictividad": 3,
+    "Continente": "Norteamérica",
+    "Imagen": "/images/AVENTURA.svg"
+  },
+  {
+    "Juego": "Monument Valley",
+    "Género": "Aventura",
+    "Almacenamiento": 0.2,
+    "Años": 10,
+    "Adictividad": 3,
+    "Continente": "Oceania",
+    "Imagen": "/images/AVENTURA.svg"
+  },
+  {
+    "Juego": "Among Us",
+    "Género": "Estrategia",
+    "Almacenamiento": 0.9,
+    "Años": 7,
+    "Adictividad": 3,
+    "Continente": "Europa",
+    "Imagen": "/images/ESTRATEGIA.svg"
+  },
+  {
+    "Juego": "Whiteout Survival",
+    "Género": "Estrategia",
+    "Almacenamiento": 0.5,
+    "Años": 1,
+    "Adictividad": 3,
+    "Continente": "Norteamérica",
+    "Imagen": "/images/ESTRATEGIA.svg"
+  },
+  {
+    "Juego": "Cafeteria Dulce",
+    "Género": "Idle",
+    "Almacenamiento": 0.4,
+    "Años": 3,
+    "Adictividad": 3,
+    "Continente": "Europa",
+    "Imagen": "/images/IDLE.svg"
+  },
+  {
+    "Juego": "Candy Crush",
+    "Género": "Casual",
+    "Almacenamiento": 0.4,
+    "Años": 12,
+    "Adictividad": 4,
+    "Continente": "Europa",
+    "Imagen": "/images/CASUAL.svg"
+  },
+  {
+    "Juego": "Bloons TD",
+    "Género": "Estrategia",
+    "Almacenamiento": 0.14,
+    "Años": 17,
+    "Adictividad": 4,
+    "Continente": "Norteamérica",
+    "Imagen": "/images/ESTRATEGIA.svg"
+  },
+  {
+    "Juego": "Plantas vs Zombies",
+    "Género": "Estrategia",
+    "Almacenamiento": 0.1,
+    "Años": 15,
+    "Adictividad": 4,
+    "Continente": "Norteamérica",
+    "Imagen": "/images/ESTRATEGIA.svg"
+  },
+  {
+    "Juego": "Tap Titans 2",
+    "Género": "Idle",
+    "Almacenamiento": 0.5,
+    "Años": 8,
+    "Adictividad": 5,
+    "Continente": "Norteamérica",
+    "Imagen": "/images/IDLE.svg"
+  },
+  {
+    "Juego": "SimCity",
+    "Género": "Tycoon",
+    "Almacenamiento": 1.0,
+    "Años": 10,
+    "Adictividad": 5,
+    "Continente": "Norteamérica",
+    "Imagen": "/images/TYCOON.svg"
+  },
+  {
+    "Juego": "Fallout Shelter",
+    "Género": "Tycoon",
+    "Almacenamiento": 0.4,
+    "Años": 9,
+    "Adictividad": 5,
+    "Continente": "Norteamérica",
+    "Imagen": "/images/TYCOON.svg"
+  },
+  {
+    "Juego": "RollerCoaster",
+    "Género": "Tycoon",
+    "Almacenamiento": 0.4,
+    "Años": 8,
+    "Adictividad": 5,
+    "Continente": "Europa",
+    "Imagen": "/images/TYCOON.svg"
+  }
+]

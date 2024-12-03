@@ -1,0 +1,132 @@
+<!-- Script JS -->
+<script>
+  // Importamos las dependencias necesarias
+import * as d3 from "d3";
+import juegos from "/src/data/juegos.json"; // Importamos juegos
+
+// Escala para adictividad (color de relleno)
+const adictividad = d3
+  .scaleLinear()
+  .domain([1, 2, 3, 4, 5])
+  .range(["#000aff", "#9200b8", "#e92fed", "#ff9a51", "#ffe86f"]);
+
+// Escala para continente (color de borde)
+const continente = d3
+  .scaleOrdinal()
+  .domain(["África", "Asia", "Europa", "Norteamérica", "Sudamérica"])
+  .range(["#000aff", "#9200b8", "#e92fed", "#ff9a51", "#ffe86f"]);
+
+// Función para cargar SVG desde la carpeta "public/images"
+async function loadSVG(url) {
+  const response = await fetch(url);
+  if (!response.ok) {
+    throw new Error(`Error al cargar SVG: ${response.statusText}`);
+  }
+  return await response.text();
+}
+
+// Cargar dinámicamente los SVGs y aplicar los colores
+let juegosSVG = [];
+
+$: (async () => {
+  try {
+    juegosSVG = await Promise.all(
+      juegos.map(async (juego) => {
+        const svgContent = await loadSVG(juego.Imagen);
+
+        // Aplica tanto el fill como el stroke en un solo replace()
+        const updatedSVGContent = svgContent.replace(
+          /<rect/g,
+          `<rect fill="${adictividad(juego.Adictividad)}" stroke="${continente(juego.Continente)}" stroke-width="2"`
+        );
+
+        return { ...juego, svgContent: updatedSVGContent };
+      })
+    );
+  } catch (error) {
+    console.error(error);
+  }
+})();
+
+
+
+
+
+  // Al cargar el componente, cargamos todos los SVG necesarios
+  $: (async () => {
+    try {
+      juegosSVG = await Promise.all(
+        juegos.map(async (juego) => {
+          const svgContent = await loadSVG(juego.Imagen);
+          
+          // Cambia el color de los rectángulos en el SVG según la adictividad
+          const updatedSVGContent = svgContent.replace(/<rect/g, `<rect fill="${adictividad(juego.Adictividad)}"`);
+
+          return { ...juego, svgContent: updatedSVGContent };
+        })
+      );
+    } catch (error) {
+      console.error(error);
+    }
+  })();
+</script>
+
+<!-- Estructura contenido HTML -->
+<main>
+  <div class="header">
+    <h1 class="titulo">Gamer de bolsillo</h1>
+    <h2 class="subtitulo">Relevamiento de datos sobre jueguitos de celu</h2>
+  </div>
+
+  <div class="contenedor">
+    {#each juegosSVG as juego}
+    <div class="juego-item">
+      <p>{juego.Juego}</p>
+      <div 
+        class="continentes"
+        style="border-color: {adictividad(juego.Adictividad)}; width: {juego.Años * 5}%;"></div>
+      <div class="modulos">
+        {@html juego.svgContent} <!-- Asegúrate de que svgContent sea válido -->
+      </div>
+    </div>
+    {/each}
+  </div>
+</main>
+
+<!-- Estilos CSS -->
+<style>
+ main {
+  height: 100%;
+  margin: 0;
+  background-color: black;
+  color: white;
+}
+
+.contenedor {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  max-width: 1020px;
+  margin: auto;
+}
+
+.continentes {
+  display: flex;
+  flex-direction: row-reverse;
+  height: 40px;
+  border-width: 5px;
+}
+
+.modulos {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modulos svg {
+  width: 50px;
+  height: 50px;
+}
+
+</style>
